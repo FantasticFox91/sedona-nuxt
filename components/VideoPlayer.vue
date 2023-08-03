@@ -2,6 +2,7 @@
   import IconReplay from '@/components/icons/IconReplay.vue';
   import IconSubtitle from '@/components/icons/IconSubtitles.vue';
   import IconFullscreen from '@/components/icons/IconFullscreen.vue';
+  import video from '../assets/free-video.mp4';
 
   import { ref, onMounted } from 'vue';
 
@@ -10,7 +11,6 @@
   const videoRef: {value: HTMLVideoElement | null} = ref(null);
   const isPlaying = ref(false);
   // Link to video https://www.pexels.com/ru-ru/video/6981411/ by Mikhail Nilov
-  const videoUrl = '/assets/free-video.mp4';
   const currentTime = ref(0);
   const duration = ref(0);
   const isFullscreen = ref(false);
@@ -101,7 +101,7 @@
 
 <template>
   <div div class="video-player">
-    <video class="video-player__video" ref="videoRef" :src="videoUrl" @play="onPlay" @pause="onPause" @click="togglePlay" @timeupdate="onTimeUpdate"></video>
+    <video class="video-player__video" ref="videoRef" :src="video" @play="onPlay" @pause="onPause" @click="togglePlay" @timeupdate="onTimeUpdate"></video>
     <div class="video-player__controls">
       <div class="video-player__duration">
         <input class="video-player__track" type="range" :max="duration" v-model="currentTime" @input="onRangeChange" @click="onRangeClick"/>
