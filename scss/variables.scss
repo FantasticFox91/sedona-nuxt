@@ -1,0 +1,80 @@
+// Colors
+// ---------------------------------
+
+// Default
+
+$color-default-black:               #000000;
+$color-default-white:               #ffffff;
+$color-transparent:                 rgba(255, 255, 255, 0);
+
+// Project palette
+// для нейминга цветов используем https://www.htmlcsscolor.com/hex/334482
+
+$color-seagull:                     #81b3d2;
+$color-night-rider:                 #333333;
+$color-flamingo:                    #dc6243;
+$color-pine-cone:                   #766458;
+$color-rustic-red:                  #491213;
+$color-summer-sky:                  #23a9e1;
+$color-social-hover:                #669ec0;
+$color-social-active:               #5496bd;
+$color-whisper:                     #eeeeee;
+$color-light-gray:                  #d6d6d6;
+$color-dark-salmon:                 #f49774;
+$color-sundown:                     #f4b1a4;
+$color-roman-coffee:                #766357;
+$color-white-smoke:                 #f2f2f2;
+$color-whisper:                     #e5e5e5;
+$color-whisper-light:               #eaeaea;
+$color-whisper-dark:                #e6e6e6;
+$color-black-opacity-2:             rgba(1, 1, 1, 0.2);
+$color-black-opacity-3:             rgba(0, 0, 0, 0.3);
+$color-white-opacity-2:             rgba(255, 255, 255, 0.2);
+$color-white-opacity-3:             rgba(255, 255, 255, 0.3);
+
+// Gradient
+
+$opacity-to-black:                  linear-gradient(180deg, rgba(0, 0, 0, 0) 85%, rgba(0, 0, 0, 0.2) 100%);
+
+// Typography
+// ---------------------------------
+
+// переменная используемая в html для подключения скейлинга
+$fz-default:                        18px;
+$lh-default:                        26px;
+$fw-default:                        400;
+
+// у некоторых шрифтов в ios возникают проблемы с символом рубля
+// https://www.artlebedev.ru/kovodstvo/sections/159/#13
+$ff-rouble:                         "Rouble", "Arial", sans-serif;
+$ff-main:                           "PT Sans", "Arial", sans-serif;
+
+$ff-placeholder:                    "Placeholder", "Arial", sans-serif;
+
+// Animation
+// ---------------------------------
+
+$tf-default:                        ease;
+$trans-default:                     0.3s $tf-default;
+
+// если требуется изинг отличный от $tf-default, то переменную называем не цифрой
+$trans-modal:                       0.6s cubic-bezier(0.55, 0, 0.1, 1);
+
+$trans-600:                         0.6s $tf-default;
+
+// Viewports
+// ---------------------------------
+
+$vp-320:                            320px;
+$vp-375:                            375px;
+$vp-768:                            768px;
+$vp-1024:                           1024px;
+$vp-1200:                           1200px;
+$vp-1440:                           1440px;
+$vp-1920:                           1920px;
+
+// Retina
+// ---------------------------------
+
+$retina-dpi:                        144dpi;
+$retina-dppx:                       1.5dppx;
