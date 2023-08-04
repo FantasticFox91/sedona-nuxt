@@ -39,7 +39,6 @@
 
   const onPlay = () => {
     isPlaying.value = true;
-    console.log(videoRef.value)
   };
 
   const onPause = () => {
@@ -104,7 +103,7 @@
     <video class="video-player__video" ref="videoRef" :src="video" @play="onPlay" @pause="onPause" @click="togglePlay" @timeupdate="onTimeUpdate"></video>
     <div class="video-player__controls">
       <div class="video-player__duration">
-        <input class="video-player__track" type="range" :max="duration" v-model="currentTime" @input="onRangeChange" @click="onRangeClick"/>
+        <input class="video-player__track" type="range" :max="Math.ceil(duration)" v-model="currentTime" @input="onRangeChange" @click="onRangeClick"/>
       </div>
       <button class="video-player__icon video-player__icon--replay" type="button" @click="onReset">
         <IconReplay />
