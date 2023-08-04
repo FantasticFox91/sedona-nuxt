@@ -4,4 +4,14 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
   },
+  modules: [
+    '@pinia/nuxt',
+    '@vee-validate/nuxt',
+  ],
+  pinia: {
+    autoImports: [
+      'defineStore',
+      ['defineStore', 'definePiniaStore'],
+    ],
+  },
 })

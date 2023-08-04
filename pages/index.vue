@@ -1,3 +1,10 @@
+<script setup>
+import { useCounterStore } from '../stores/counter'
+
+const counter = useCounterStore();
+console.log(counter.counter)
+</script>
+
 <template>
   <div>
     <PromoSection>

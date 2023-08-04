@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import * as Yup from 'yup';
-import { Field, Form } from 'vee-validate';
 import type { SubmissionHandler } from 'vee-validate';
-// import { useReviewStore } from '@/stores/review';
+import { useReviewStore } from '@/stores/review';
 
 type userData = {
   name: string,
@@ -15,7 +14,7 @@ type userData = {
   comment: string
 }
 
-// const useReview = useReviewStore();
+const useReview = useReviewStore();
 
 const schema = Yup.object({
   name: Yup.string().required().matches(/[\u0401\u0451\u0410-\u044f]/),
@@ -27,12 +26,13 @@ const schema = Yup.object({
 
 const onSubmit: SubmissionHandler = (values) => {
   const value = values as userData;
-  // useReview.sendReview(value);
+  useReview.sendReview(value);
 }
 
 </script>
 
 <template>
+
   <section class="review">
     <Form class="review__form" @submit="onSubmit" :validation-schema="schema" v-slot="{ errorBag }" :initialValues="{review: 'positive'}">
       <fieldset class="form__fieldset form__fieldset--personal">
