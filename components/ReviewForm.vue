@@ -309,7 +309,7 @@ const onSubmit: SubmissionHandler = (values) => {
 .form__field--mail {
   .form__input {
     padding-right: 60px;
-    background: $color-white-smoke url('../../assets/mail.png') no-repeat right;
+    background: $color-white-smoke url('../assets/mail.png') no-repeat right;
   }
 }
 
@@ -372,7 +372,7 @@ const onSubmit: SubmissionHandler = (values) => {
 }
 
 .form__checkbox-input:checked + .form__checkbox::after {
-  background: $color-white-smoke url('../../assets/svg/checkmark.svg') no-repeat 50% 50%;
+  background: $color-white-smoke url('../assets/svg/checkmark.svg') no-repeat 50% 50%;
 }
 
 .form__textarea {
