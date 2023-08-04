@@ -8,16 +8,18 @@ useHead({
 </script>
 
 <template>
-  <PromoSection :isInnerPage="true">
-    <template #heading>
-      Фото и видео
-    </template>
-    <template #subheading>
-      Не можете решиться на путешествие из-за курса?<br /> Фотографии помогут вам забыть о политике и экономике.
-    </template>
-  </PromoSection>
-  <CatalogList />
-  <DoubtsSection />
+  <div>
+    <PromoSection :isInnerPage="true">
+      <template #heading>
+        Фото и видео
+      </template>
+      <template #subheading>
+        Не можете решиться на путешествие из-за курса?<br /> Фотографии помогут вам забыть о политике и экономике.
+      </template>
+    </PromoSection>
+    <CatalogList />
+    <DoubtsSection />
+  </div>
 </template>
 
 <style lang="scss" scoped>
