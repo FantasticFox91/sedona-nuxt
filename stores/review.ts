@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia';
-import { useModalsStore } from './modals';
-import axios from 'axios';
 
 type userData = {
   name: string,
@@ -13,33 +11,12 @@ type userData = {
   comment: string
 }
 
-const ROUTES = {
-  'review': 'http://localhost:3001/reviews'
-}
-
 export const useReviewStore = defineStore('review', {
-  
   actions: {
-    sendReview(data: userData, form) {
-      const modalsStore = useModalsStore();
-      modalsStore.isSuccess = true;
-    }
+    sendReview(data: userData) {
+      const nuxtApp = useNuxtApp();
+      const api = nuxtApp.api;
+      return api.review.post(data)
+    },
   }
 })
-
-// actions: {
-//   sendReview(data: userData, form) {
-//     const modalsStore = useModalsStore();
-//     modalsStore.isSuccess = true;
-//     axios.post(ROUTES.review, {
-//       data: data
-//     })
-//     .then((response) => {
-//       modalsStore.isSuccess = true;
-//       console.log(response)
-//     })
-//     .catch(() => {
-//       modalsStore.isError = true;
-//     })
-//   }
-// }

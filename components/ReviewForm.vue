@@ -2,6 +2,7 @@
 import * as Yup from 'yup';
 import type { SubmissionHandler } from 'vee-validate';
 import { useReviewStore } from '@/stores/review';
+import { Field } from 'vee-validate';
 
 type userData = {
   name: string,
@@ -20,13 +21,17 @@ const schema = Yup.object({
   name: Yup.string().required().matches(/[\u0401\u0451\u0410-\u044f]/),
   secondName: Yup.string().required().matches(/[а-яА-ЯЁё]/g),
   patronym: Yup.string().matches(/[\u0401\u0451\u0410-\u044f]/),
-  phoneNumber: Yup.string().required().min(16).matches(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,9}$/),
+  phoneNumber: Yup.string().required().min(15),
   email: Yup.string().email().required(),
 })
 
-const onSubmit: SubmissionHandler = (values) => {
+const onSubmit: SubmissionHandler = async (values, { resetForm }) => {
   const value = values as userData;
-  useReview.sendReview(value);
+  const isSent = await useReview.sendReview(value);
+
+  if(isSent) {
+    resetForm();
+  }
 }
 
 </script>
@@ -52,7 +57,22 @@ const onSubmit: SubmissionHandler = (values) => {
       </fieldset>
       <fieldset class="form__fieldset form__fieldset--contacts">
         <h2 class="form__heading">Контактная информация:</h2>
-        <TextInput />
+        <div class="form__field form__field--contacts form__field--phone">
+          <label class="form__label" for="phoneNumber">Телефон*:</label>
+          <Field
+            class="form__input"
+            :class="{error: Object.keys(errorBag).includes('phoneNumber')}"
+            as="input"
+            type="text"
+            name="phoneNumber"
+            id="phoneNumber"
+            v-maska
+            data-maska="+7(###)###-##-##"
+            :validateOnInput="false"
+            :validateOnBlur="false"
+            :validateOnChange="false"
+          />
+        </div>
         <div class="form__field form__field--contacts form__field--mail">
           <label class="form__label" for="email">Электронная почта*:</label>
           <Field class="form__input" :class="{error: Object.keys(errorBag).includes('email')}" as="input" type="email" name="email" id="email" :validateOnInput="false" :validateOnBlur="false" :validateOnChange="false"/>

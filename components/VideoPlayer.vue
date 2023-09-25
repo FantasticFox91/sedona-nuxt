@@ -2,7 +2,6 @@
   import IconReplay from '@/components/icons/IconReplay.vue';
   import IconSubtitle from '@/components/icons/IconSubtitles.vue';
   import IconFullscreen from '@/components/icons/IconFullscreen.vue';
-  import video from '../assets/free-video.mp4';
 
   import { ref, onMounted } from 'vue';
 
@@ -14,6 +13,8 @@
   const currentTime = ref(0);
   const duration = ref(0);
   const isFullscreen = ref(false);
+  const nuxtApp = useNuxtApp();
+  const api = nuxtApp.api;
 
   const togglePlay = () => {
     let video;
@@ -89,6 +90,11 @@
     }
   }
 
+  const { data } = await useAsyncData(
+    'video',
+    async () => api.video.get()
+  );
+
   onMounted(() => {
     const video = videoRef.value;
     if (video) {
@@ -100,7 +106,7 @@
 
 <template>
   <div div class="video-player">
-    <video class="video-player__video" ref="videoRef" :src="video" @play="onPlay" @pause="onPause" @click="togglePlay" @timeupdate="onTimeUpdate"></video>
+    <video class="video-player__video" ref="videoRef" :src="data.src" @play="onPlay" @pause="onPause" @click="togglePlay" @timeupdate="onTimeUpdate"></video>
     <div class="video-player__controls">
       <div class="video-player__duration">
         <input class="video-player__track" type="range" :max="Math.ceil(duration)" v-model="currentTime" @input="onRangeChange" @click="onRangeClick"/>

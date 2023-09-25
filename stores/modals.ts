@@ -6,6 +6,7 @@ export const useModalsStore = defineStore('modals', {
     return {
       isError: false,
       isSuccess: false,
+      sent: false,
     }
   }
 })

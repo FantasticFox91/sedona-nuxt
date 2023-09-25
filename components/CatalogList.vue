@@ -1,82 +1,19 @@
 <script setup lang="ts">
-import IconLikeVue from './icons/IconLike.vue';
+const nuxtApp = useNuxtApp();
+const api = nuxtApp.api;
+
+const { data } = await useAsyncData(
+  'cards',
+  async () => api.cards.get()
+)
+
 </script>
 
 <template>
   <section class="catalog">
     <ul class="catalog__list">
-      <li class="catalog__item catalog__item--wide">
-        <div class="catalog__wrapper">
-          <picture>
-            <source type="image/webp" media="(min-width: 1200px)" srcset="../assets/spaces-desktop-wide.webp, ../assets/spaces-desktop-wide@2x.webp 2x" width="648" height="400">
-            <source type="image/webp" media="(min-width: 768px)" srcset="../assets/spaces-desktop.webp, ../assets/spaces-desktop@2x.webp 2x" width="648" height="400">
-            <img class="catalog__image" src="../assets/spaces.webp" srcset="../assets/spaces@2x.webp" alt="не родные просторы" width="280" height="280">
-          </picture>
-          <div class="catalog__description">
-            <div class="catalog__text">
-              <h2 class="catalog__title">Не родные просторы</h2>
-              <p class="catalog__author">Автор фото: Борис</p>
-            </div>
-            <div class="catalog__likes">
-              <IconLikeVue class="catalog__icon" />
-              <span class="catalog__like-count">1350</span>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="catalog__item">
-        <div class="catalog__wrapper">
-          <picture>
-            <source type="image/webp" media="(min-width: 768px)" srcset="../assets/vegetation-desktop.webp, ../assets/vegetation-desktop@2x.webp 2x" width="324" height="267">
-            <img class="catalog__image" src="../assets/vegetation.webp" srcset="../assets/vegetation@2x.webp" alt="Местная растительность" width="280" height="280">
-          </picture>
-          <div class="catalog__description">
-            <div class="catalog__text">
-              <h2 class="catalog__title">Местная растительность</h2>
-              <p class="catalog__author">Автор фото: Сергей</p>
-            </div>
-            <div class="catalog__likes">
-              <IconLikeVue class="catalog__icon" />
-              <span class="catalog__like-count">143</span>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="catalog__item">
-        <div class="catalog__wrapper">
-          <picture>
-            <source type="image/webp" media="(min-width: 768px)" srcset="../assets/road-to-the-north-desktop.webp, ../assets/road-to-the-north-desktop@2x.webp 2x" width="324" height="267">
-            <img class="catalog__image" src="../assets/road-to-the-north.webp" srcset="../assets/road-to-the-north@2x.webp" alt="Дорога на север" width="280" height="280">
-          </picture>
-          <div class="catalog__description">
-            <div class="catalog__text">
-              <h2 class="catalog__title">Дорога на север</h2>
-              <p class="catalog__author">Автор фото: Петр</p>
-            </div>
-            <div class="catalog__likes">
-              <IconLikeVue class="catalog__icon" />
-              <span class="catalog__like-count">96</span>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="catalog__item">
-        <div class="catalog__wrapper">
-          <picture>
-            <source type="image/webp" media="(min-width: 768px)" srcset="../assets/devil-bridge-desktop.webp, ../assets/devil-bridge-desktop@2x.webp 2x" width="324" height="267">
-            <img class="catalog__image" src="../assets/devil-bridge.webp" srcset="../assets/devil-bridge@2x.webp" alt="Мост Дьявола" width="280" height="280">
-          </picture>
-          <div class="catalog__description">
-            <div class="catalog__text">
-              <h2 class="catalog__title">Мост Дьявола</h2>
-              <p class="catalog__author">Автор фото: Антон</p>
-            </div>
-            <div class="catalog__likes">
-              <IconLikeVue class="catalog__icon" />
-              <span class="catalog__like-count">254</span>
-            </div>
-          </div>
-        </div>
+      <li v-for="(item, index) in data" :key="item.id" class="catalog__item" :class="{'catalog__item--wide': index === 0}">
+        <CatalogItem :data="item"/>
       </li>
     </ul>
   </section>
@@ -226,6 +163,12 @@ import IconLikeVue from './icons/IconLike.vue';
 }
 
 .catalog__like-count {
+  width: 50px;
+  text-align: center;
+  padding: 0;
+  border: none;
+  background-color: $color-transparent;
+  color: inherit;
   font-size: 14px;
   font-weight: 700;
   line-height: 24px;
